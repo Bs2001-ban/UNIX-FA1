@@ -1,0 +1,131 @@
+
+# # Sample txt # #
+# R101-55-12-12
+# R234-67-42-13
+# R511-40-40-40
+
+awk ' BEGIN{FS = "-";OFS="|";count=0}
+
+{
+    if(($2==$3) && ($3==$4))
+    {
+        count+=1;
+        print $1,$2,$3,$4;
+        # print $1,"|" ,$2,"|" ,$3,"|", $4;
+    }
+}
+
+END{ OFS=" ";print "count:",count; }'
+' 
+
+
+
+
+# # Sample txt # #
+
+# 101,Adam,Cac,30
+# 103,Biday,Math,50
+# 104,Madhu,ECE,89
+# 105,Tagar,Math,78
+# 102,Juhi,Cac,50
+
+
+awk 'BEGIN{FS=","; OFS="/"}
+{
+   if($4<60)
+   {
+       print $1;
+   }
+}
+'|uniq|sort 
+
+
+
+# SID| Name| Subject| Mark
+# 101,Adam,Cac,92
+# 103,Biday,Math,68
+# 104,Madhu,ECE,70
+# 105,Tagar,Math,78
+# 102,Juhi,Cac,32
+
+
+awk ' BEGIN{FS=",";}
+{
+if(NR>1)
+{
+    if($4>=90)
+    {
+        print $2,"gold";
+    }
+    else if(($4<90) && ($4>=60))
+    {
+        print $2, "silver";
+    }
+    else
+    {
+        print $2, "bronze";
+    }
+}
+}
+
+
+'
+
+
+# Roll_no | Name| Department
+# 100234| Krish|Computer science
+# 234156| Biru|Anthro
+# 652131|Handel|Electronics
+# 234678|bandel bihari|Electronics
+# 231456|Sital Gupta|Botany
+
+
+awk 'BEGIN{FS="|"; OFS=" ";}
+{
+if(NR>1)
+{
+    a[$3]++;
+    
+}
+}
+END{ for(i in a)
+    print i, a[i];
+}
+'
+
+
+
+sort -nrk1 -t "|"|awk ' BEGIN{FS="|";}
+{
+    if(NR>1)
+    {
+        a = 0.2*$3;
+        print $1,"|",a;
+        
+    }
+}
+'|sort -nrk2 -t "|"|head -3
+
+# -n: This option specifies a numerical sort, meaning that the lines are sorted based on their numerical value rather than their lexicographical order (i.e., as numbers rather than strings).
+
+# -r: This option specifies a reverse sort, meaning that the lines are sorted in descending order rather than ascending order. Without this option, the default behavior is to sort lines in ascending order.
+
+# -k: This option specifies the key field(s) to use for sorting. It allows you to specify which field(s) to use as the sort key. For example, -k2 would sort based on the second field, -k1,1 would sort based on the first field, and -k3,3n would sort based on the third field numerically.
+
+
+sort -nk1 -t "|"|awk ' BEGIN{FS="|";OFS="|"}
+{
+    if(NR>1)
+    {
+        a = 0.2*$3;
+        print $1,a;
+        
+    }
+}
+'|sort -nk2 -t "|"|head -3
+
+
+
+
+
+
