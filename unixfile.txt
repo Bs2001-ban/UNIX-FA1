@@ -1,0 +1,99 @@
+awk '
+BEGIN{FS="|";gCount=0;eCount=0;IGNORECASE=1}
+{
+  if(NR>1){
+    if($3=="English")
+     eCount++;
+    else if($3=="geography")
+     {gCount++;}
+     }
+      
+}
+END{
+    print ("count of students for English: ",eCount)
+    print ("count of students for Geography: ",gCount)
+}'
+
+
+input:
+Roll|name|Major|Semester
+01|rudra G|English|3rd sem
+02|annie|history|2rd sem
+03|varun|maths|2rd sem
+04|rakesh|geography|1rd sem
+05|abdul M|maths|1rd sem
+
+
+
+-----------------------------------------------------------
+awk '
+BEGIN{FS="|";OFS="|";IGNORECASE=1;avg =0;}
+{
+ if($5>=90 && $6>=90 && $4=="sanghamitra"){
+     
+     avg=($5+$6)/2
+     print $1,$2,$3,$4,avg;
+ }
+    
+}
+'|sort -n
+
+
+input:
+1|latha|third|vikas|90|91
+2|Neethu|second|meridin|92|94
+3|Sethu|First|DAV|86|98
+4|Theeksana|second|DAV|97|86
+5|teju|First|SANGHAMITRA|92|94
+6|tHEEKSHITA|SECOND|SANGHAMITRA|99|100
+
+
+-----------------------------------------------------------------
+
+awk '
+BEGIN{FS="|";sum=0;count=0;}
+{
+    sum = sum+$4
+    count++;
+}
+END{
+    avg = sum/count
+    print ("averge salary",avg);
+}'
+
+
+1|latha|24|40000
+2|Neethu|23|50000
+3|Sethu|35|70000
+4|Theeksana|23|97000
+
+
+---------------------------------------------------------------
+
+awk '
+BEGIN{FS=",";sum=0;IGNORECASE=1}
+{
+  if($3=="finance")
+    sum=sum+$4;
+    
+    
+}
+END{
+    if(sum==0)
+    print "no asset found";
+    else
+    print sum;
+}'
+
+lap1,laptop,Finance,50000
+des1,desktop,finance,40000
+lap2,laptop,IT,70000
+des2,desktop,IT,80000
+prn1,printer,Finance,10000
+prn2,printer,HR,20000
+
+
+----------------------------------------------------------------
+
+
+
